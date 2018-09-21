@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Tommy <tyurderi@yahoo.de>",
   "description": "A lightweight ssh-config tool which lets you configure your .ssh/config using YAML",
-  "license": null,
+  "license": "MIT",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",
