@@ -4,10 +4,11 @@
 
 .is--index {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
   grid-gap: 3px;
   background: #333;
+  max-height: 100vh;
   .filename {
     background: #fff;
     padding: 10px;
@@ -19,25 +20,52 @@
       display: block;
     }
   }
-  .input-editor {
-    grid-column: ~"1 / 2";
-    grid-row: ~"2 / 3";
+  .items {
+    overflow-y: auto;
     background: #fff;
-    * {
-      font-size: 12px !important;
-      font-family: 'Consolas', monospace !important;
-    }
-    display: grid;
-    div.vue-codemirror {
-      display: grid;
-    }
-    .CodeMirror {
-      height: auto;
+    width: 200px;
+    .item {
+      padding: 5px;
+      display: flex;
+      flex-direction: row;
+      &.active {
+        background: rgba(0, 0, 0, 0.1);
+      }
+      .item-host {
+        font-size: 12px;
+        flex: 1;
+      }
+      .item-lines {
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.1);
+        padding: 0 10px;
+        border-radius: 10px;
+      }
     }
   }
-  .output {
-    grid-column: ~"2 / 3";
-    grid-row: ~"2 / 3";
+  .editor {
     background: #fff;
+    padding: 10px;
+    div.form-item {
+      margin: 0 0 10px 0;
+    }
+    textarea {
+      font-size: 12px;
+      font-family: 'Consolas', monospace;
+    }
   }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.25);
 }
