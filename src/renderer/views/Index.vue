@@ -67,7 +67,7 @@
                     <label for="filename">
                         .ssh/config Destination
                     </label>
-                    <v-input type="text" id="filename" v-model="config.filename"></v-input>
+                    <v-file id="filename" v-model="config.filename"></v-file>
                 </div>
             </div>
             <div class="form-buttons">

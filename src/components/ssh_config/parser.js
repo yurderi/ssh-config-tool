@@ -65,6 +65,8 @@ export default class Parser {
                 let current = null
                 let items = []
                 
+                lines = lines.filter(line => line.length > 0 && line[0] !== '#')
+    
                 for (let i = 0, line; i < lines.length, line = lines[i]; i++) {
                     if (line.toLowerCase().indexOf('host ') === 0 || i === lines.length - 2) {
                         if (current !== null) {
@@ -84,14 +86,10 @@ export default class Parser {
                             lines: []
                         }
                     } else {
-                        if (line.length === 0 || line[0] === '#') {
-                            continue
-                        }
-                        
                         current.lines.push(line)
                     }
                 }
-                
+    
                 resolve(items)
             }).catch(reject)
         })
