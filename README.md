@@ -2,6 +2,8 @@
 
 > A lightweight ssh-config tool which lets you configure your .ssh/config using a simple GUI
 
+**Warning** Since this project is in development I suggest you to create a backup of your config file.
+
 ### Screenshots
 ![First Run](./docs/img/first_run.png)
 ![Item Detail](./docs/img/item_detail.png)
