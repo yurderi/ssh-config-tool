@@ -2,23 +2,20 @@
     <div class="is--index">
         
         <div class="header">
+            <div class="item-filter">
+                <v-input type="text" v-model="filter" :placeholder="'Filter ' + items.length + ' items ...'" @keydown.esc="filter = ''"></v-input>
+            </div>
+            
             <ul class="menu">
                 <li @click="create">
                     <fa icon="plus"></fa>
                     Create
                 </li>
+                <li @click="configure">
+                    <fa icon="cog"></fa>
+                    Configure
+                </li>
             </ul>
-        </div>
-
-        <div class="filename">
-            <label for="filename">
-                .ssh/config Destination
-            </label>
-            <v-file id="filename" v-model="config.filename"></v-file>
-        </div>
-        
-        <div class="item-filter">
-            <v-input type="text" v-model="filter" placeholder="Filter..." @keydown.esc="filter = ''"></v-input>
         </div>
         
         <div class="items">
@@ -56,7 +53,27 @@
                     <v-input type="textarea" id="content" v-model="editingItem.content"></v-input>
                 </div>
             </div>
+            <div class="editor-empty" v-else>
+                No item selected
+            </div>
         </div>
+        
+        <v-modal class="configure" v-if="configureModal" width="400px">
+            <div class="title">
+                Configure
+            </div>
+            <div class="form">
+                <div class="form-item">
+                    <label for="filename">
+                        .ssh/config Destination
+                    </label>
+                    <v-input type="text" id="filename" v-model="config.filename"></v-input>
+                </div>
+            </div>
+            <div class="form-buttons">
+                <v-button @click="configureModal = false">OK</v-button>
+            </div>
+        </v-modal>
         
     </div>
 </template>
@@ -64,6 +81,7 @@
 <script>
 import ConfigParser from 'src/components/ssh_config/parser'
 import _ from 'lodash'
+import fs from 'fs-extra'
 
 export default {
     name: 'index',
@@ -78,11 +96,13 @@ export default {
             },
             
             writeLock: false,
-            filter: ''
+            filter: '',
+            
+            configureModal: false
         }
     },
     computed: {
-        filteredItems() {
+        filteredItems () {
             let me = this
             let items = me.items
             
@@ -108,6 +128,12 @@ export default {
         let me = this
         
         me.config = me.$config.get('config', me.config)
+        
+        fs.exists(me.config.filename).then(result => {
+            if (result === false) {
+                me.configureModal = true
+            }
+        })
     },
     methods: {
         readItems () {
@@ -173,6 +199,12 @@ export default {
             }
             
             me.writeItems()
+        },
+        
+        configure () {
+            let me = this
+            
+            me.configureModal = true
         }
     }
 }
