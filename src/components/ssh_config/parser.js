@@ -17,6 +17,23 @@ export default class Parser {
         me.content = ''
     }
     
+    write (items) {
+        let me = this
+        let content = ''
+    
+        items.forEach(item => {
+            content += 'Host ' + item.host
+            content += '\n'
+        
+            item.content.split('\n').forEach(line => {
+                content += '  ' + line.trim()
+                content += '\n'
+            })
+        })
+    
+        return fs.writeFile(me.filename, content)
+    }
+    
     /**
      * Tries to read the given filename
      *
