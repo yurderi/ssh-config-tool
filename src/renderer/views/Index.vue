@@ -178,12 +178,12 @@ export default {
             let me = this
             
             me.$swal({
-                title: 'Remove ' + item.host,
-                text: 'Are you sure?',
+                title: 'Are you sure?',
+                text: 'Remove ' + item.host,
                 type: 'error',
                 confirmButtonText: 'Yes'
             }).then(result => {
-                if (result.value === true) {
+                if (result && result.value === true) {
                     me.items.splice(me.items.indexOf(item), 1)
                     me.editingItem = null
                     
