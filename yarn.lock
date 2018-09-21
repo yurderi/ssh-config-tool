@@ -5973,7 +5973,7 @@ lodash.where@^3.1.0:
     lodash._basematches "^3.0.0"
     lodash.isarray "^3.0.0"
 
-lodash@^4.17.10, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5:
+lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
 
@@ -8729,6 +8729,10 @@ swap-case@^1.1.0:
     lower-case "^1.1.1"
     upper-case "^1.1.1"
 
+sweetalert2@7.x:
+  version "7.26.29"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-7.26.29.tgz#0bfdbe3d10dca120166a34f463598e5a96176f5b"
+
 tableize-object@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/tableize-object/-/tableize-object-0.1.0.tgz#7c29e0133b27d48b56b9e76d3a28d241df1b3a24"
@@ -9454,6 +9458,12 @@ vue-style-loader@^4.1.0:
   dependencies:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
+
+vue-sweetalert2@^1.5.3:
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/vue-sweetalert2/-/vue-sweetalert2-1.5.3.tgz#a6394b835e454173d498ed6ddf97cee96910023f"
+  dependencies:
+    sweetalert2 "7.x"
 
 vue-template-compiler@^2.5.16:
   version "2.5.17"

@@ -22,7 +22,7 @@
         </div>
         
         <div class="items">
-            <div class="item" v-for="item in filteredItems" @click="editingItem = item"
+            <div class="item" v-for="item in filteredItems" @click="edit(item)"
                  :class="{ active: item === editingItem }">
                 <div class="item-host">
                     {{ item.host }}
@@ -35,6 +35,14 @@
         
         <div class="editor">
             <div class="editor-content" v-if="editingItem">
+                <div class="form-buttons">
+                    <v-button @click="submit(editingItem)" :spin="writeLock">
+                        Save
+                    </v-button>
+                    <v-button @click="remove(editingItem)" class="remove">
+                        <fa icon="trash"></fa>
+                    </v-button>
+                </div>
                 <div class="form-item">
                     <label for="host">
                         Host (alias)
@@ -46,11 +54,6 @@
                         Definition
                     </label>
                     <v-input type="textarea" id="content" v-model="editingItem.content"></v-input>
-                </div>
-                <div class="form-buttons">
-                    <v-button @click="writeItems" :spin="writeLock">
-                        Save
-                    </v-button>
                 </div>
             </div>
         </div>
@@ -109,7 +112,9 @@ export default {
             let me = this
             let parser = new ConfigParser(me.config.filename)
             
-            parser.parse().then(items => me.items = items)
+            parser.parse().then(items => {
+                me.items = items
+            })
         },
         writeItems () {
             let me = this
@@ -128,12 +133,42 @@ export default {
                 let item = {
                     host: '',
                     content: '',
-                    lines: []
+                    lines: [],
+                    
+                    _new: true
                 }
                 
-                me.items.push(item)
-                me.editingItem = item
+                me.edit(item)
             })
+        },
+        edit (item) {
+            let me = this
+            
+            me.editingItem = item
+        },
+        remove (item) {
+            let me = this
+            
+            me.$swal({
+                title: 'Remove ' + item.host,
+                text: 'Are you sure?',
+                type: 'error',
+                confirmButtonText: 'Yes'
+            }).then(result => {
+                if (result.value === true) {
+                    me.items.splice(me.items.indexOf(item), 1)
+                    me.writeItems()
+                }
+            })
+        },
+        submit (item) {
+            let me = this
+            
+            if (item._new === true) {
+                me.items.push(item)
+            }
+            
+            me.writeItems()
         }
     }
 }

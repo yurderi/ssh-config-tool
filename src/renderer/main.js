@@ -16,12 +16,15 @@ Vue.use(VueUI)
 
 // Setup codemirror
 import VueCodemirror from 'vue-codemirror'
-
-// require styles
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/yaml/yaml.js'
 
 Vue.use(VueCodemirror)
+
+// Setup sweet alert
+import VueSweetalert2 from 'vue-sweetalert2';
+
+Vue.use(VueSweetalert2);
 
 Vue.prototype.$config = require('electron-settings')
 

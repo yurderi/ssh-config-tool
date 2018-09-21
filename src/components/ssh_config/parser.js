@@ -66,8 +66,12 @@ export default class Parser {
                 let items = []
                 
                 for (let i = 0, line; i < lines.length, line = lines[i]; i++) {
-                    if (line.toLowerCase().indexOf('host ') === 0 || i === lines.length - 1) {
+                    if (line.toLowerCase().indexOf('host ') === 0 || i === lines.length - 2) {
                         if (current !== null) {
+                            if (i === lines.length - 2) {
+                                current.lines.push(line)
+                            }
+                            
                             current.content = current.lines.join('\n')
                             
                             items.push(current)
