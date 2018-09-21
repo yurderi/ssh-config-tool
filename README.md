@@ -3,9 +3,9 @@
 > A lightweight ssh-config tool which lets you configure your .ssh/config using a simple GUI
 
 ### Screenshots
-![First Run](docs/img/first_run.png)
-![Item Detail](docs/img/item_detail.png)
-![Item Delete Modal](docs/img/item_delete.png)
+![First Run](./docs/img/first_run.png)
+![Item Detail](./docs/img/item_detail.png)
+![Item Delete Modal](./docs/img/item_delete.png)
 
 #### Build Setup
 
