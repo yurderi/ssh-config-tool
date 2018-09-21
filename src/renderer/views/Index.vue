@@ -18,7 +18,7 @@
         </div>
         
         <div class="item-filter">
-            <v-input type="text" v-model="filter" placeholder="Filter..."></v-input>
+            <v-input type="text" v-model="filter" placeholder="Filter..." @keydown.esc="filter = ''"></v-input>
         </div>
         
         <div class="items">
@@ -63,6 +63,7 @@
 
 <script>
 import ConfigParser from 'src/components/ssh_config/parser'
+import _ from 'lodash'
 
 export default {
     name: 'index',
@@ -83,12 +84,13 @@ export default {
     computed: {
         filteredItems() {
             let me = this
+            let items = me.items
             
-            if (!me.filter) {
-                return me.items
+            if (me.filter.length > 0) {
+                items = items.filter(item => item.host.indexOf(me.filter) > -1)
             }
             
-            return me.items.filter(item => item.host.indexOf(me.filter) > -1)
+            return _.sortBy(items, item => item.host)
         }
     },
     watch: {
@@ -157,6 +159,8 @@ export default {
             }).then(result => {
                 if (result.value === true) {
                     me.items.splice(me.items.indexOf(item), 1)
+                    me.editingItem = null
+                    
                     me.writeItems()
                 }
             })
